@@ -1,0 +1,35 @@
+<header class="site-header" role="banner">
+    <div class="container">
+        <div class="header-inner">
+
+            {{!-- Brand / Logo --}}
+            <div class="header-brand">
+                {{#if @site.logo}}
+                <a href="{{@site.url}}" class="site-logo-link" aria-label="{{@site.title}} home">
+                    <img src="{{@site.logo}}" alt="{{@site.title}}" class="header-logo">
+                </a>
+                {{else}}
+                <a href="{{@site.url}}" class="site-name-link">{{@site.title}}</a>
+                {{/if}}
+            </div>
+
+            {{!-- Mobile hamburger (right side) --}}
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            {{!-- Navigation + Subscribe (both inside the collapsible area) --}}
+            <nav class="site-nav" role="navigation" aria-label="Main navigation">
+                {{navigation}}
+                {{#unless @member}}
+                <div class="nav-subscribe-wrapper">
+                    <a href="javascript:void(0)" data-portal="signup" class="nav-subscribe-btn">Subscribe</a>
+                </div>
+                {{/unless}}
+            </nav>
+
+        </div>
+    </div>
+</header>

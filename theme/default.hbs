@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{meta_title}}</title>
+
+    {{!-- Favicon --}}
+    {{#if @site.icon}}
+    <link rel="icon" href="{{@site.icon}}" type="image/png">
+    {{/if}}
+
+    {{!-- Stylesheets --}}
+    <link rel="stylesheet" href="{{asset "css/style.css"}}">
+
+    {{!-- Ghost injects Open Graph, Twitter Cards, structured data, etc. --}}
+    {{ghost_head}}
+</head>
+<body class="{{body_class}}">
+
+    {{!-- Site Header --}}
+    {{> header}}
+
+    {{!-- Main Content --}}
+    <main id="main-content" role="main">
+        {{{body}}}
+    </main>
+
+    {{!-- Site Footer --}}
+    {{> footer}}
+
+    {{!-- Nav toggle script --}}
+    <script>
+    (function () {
+        var toggle = document.querySelector('.nav-toggle');
+        var navList = document.querySelector('.site-nav');
+        if (!toggle || !navList) return;
+        toggle.addEventListener('click', function () {
+            var expanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', String(!expanded));
+            navList.classList.toggle('is-open');
+            toggle.classList.toggle('is-active');
+        });
+        // Close on outside click
+        document.addEventListener('click', function (e) {
+            if (!toggle.contains(e.target) && !navList.contains(e.target)) {
+                toggle.setAttribute('aria-expanded', 'false');
+                navList.classList.remove('is-open');
+                toggle.classList.remove('is-active');
+            }
+        });
+    })();
+
+    // Newsletter form feedback
+    (function () {
+        document.querySelectorAll('[data-members-form="subscribe"]').forEach(function (form) {
+            form.addEventListener('submit', function () {
+                var btn = form.querySelector('button[type="submit"]');
+                if (btn) btn.textContent = 'Subscribing…';
+            });
+        });
+        document.addEventListener('members:signup:success', function () {
+            document.querySelectorAll('.form-message.success').forEach(function (el) {
+                el.style.display = 'block';
+            });
+            document.querySelectorAll('.form-message.error').forEach(function (el) {
+                el.style.display = 'none';
+            });
+        });
+        document.addEventListener('members:signup:error', function () {
+            document.querySelectorAll('.form-message.error').forEach(function (el) {
+                el.style.display = 'block';
+            });
+        });
+    })();
+    </script>
+
+    {{ghost_foot}}
+</body>
+</html>

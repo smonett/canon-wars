@@ -1,0 +1,132 @@
+{{!< default}}
+
+{{#post}}
+<div class="post-full-wrapper{{#has tag="cogs-log"}} is-cogs-log{{/has}}">
+
+    {{!-- Post header --}}
+    <header class="post-full-header">
+        <div class="container">
+
+            {{!-- Cog's Log badge (conditional) --}}
+            {{#has tag="cogs-log"}}
+            <div class="cogs-log-badge" aria-label="Cog's Log entry">
+                <span aria-hidden="true">⚙️</span> Cog's Log
+            </div>
+            {{/has}}
+
+            {{!-- Primary tag --}}
+            {{#if primary_tag}}
+            <div class="post-full-tag-label">
+                <a href="{{primary_tag.url}}" class="post-tag">{{primary_tag.name}}</a>
+            </div>
+            {{/if}}
+
+            {{!-- Title --}}
+            <h1 class="post-full-title">{{title}}</h1>
+
+            {{!-- Meta row --}}
+            <div class="post-full-meta">
+                {{#foreach authors}}
+                <a href="/cast/" class="post-meta-author">
+                    {{#if profile_image}}
+                    <img src="{{img_url profile_image size="xs"}}" alt="{{name}}" class="post-meta-avatar">
+                    {{/if}}
+                    {{name}}
+                </a>
+                {{/foreach}}
+                <span class="dot" aria-hidden="true">&middot;</span>
+                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+                <span class="dot" aria-hidden="true">&middot;</span>
+                <span class="post-reading-time">{{reading_time}}</span>
+            </div>
+
+        </div>
+    </header>
+
+    {{!-- Feature image --}}
+    {{#if feature_image}}
+    <div class="post-full-image">
+        <img
+            src="{{img_url feature_image size="xl"}}"
+            srcset="{{img_url feature_image size="m"}} 600w,
+                    {{img_url feature_image size="l"}} 1000w,
+                    {{img_url feature_image size="xl"}} 2000w"
+            sizes="100vw"
+            alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+        >
+        {{#if feature_image_caption}}
+        <figcaption class="post-full-image-caption">{{feature_image_caption}}</figcaption>
+        {{/if}}
+    </div>
+    {{/if}}
+
+    {{!-- Post body --}}
+    <div class="container">
+        <section class="post-full-content gh-content">
+            {{content}}
+        </section>
+
+        {{!-- Post footer --}}
+        <footer class="post-full-footer">
+
+            {{!-- Tags list --}}
+            {{#if tags}}
+            <div class="post-full-tag-list">
+                {{#foreach tags}}
+                <a href="{{url}}" class="post-tag">{{name}}</a>
+                {{/foreach}}
+            </div>
+            {{/if}}
+
+            {{!-- Author cards --}}
+            {{#foreach authors}}
+            <div class="author-card">
+                {{#if profile_image}}
+                <img
+                    src="{{img_url profile_image size="xs"}}"
+                    alt="{{name}}"
+                    class="author-avatar"
+                    loading="lazy"
+                >
+                {{/if}}
+                <div class="author-info">
+                    <h4 class="author-name">
+                        <a href="{{url}}">{{name}}</a>
+                    </h4>
+                    {{#if bio}}
+                    <p class="author-bio">{{bio}}</p>
+                    {{/if}}
+                    {{#if location}}
+                    <p class="author-location">{{location}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            {{/foreach}}
+
+        </footer>
+    </div>
+
+    {{!-- Related posts (same primary tag, excluding this post) --}}
+    {{#if primary_tag}}
+    {{#get "posts" filter="tag:{{primary_tag.slug}}" limit="4" as |related_posts|}}
+    {{#if related_posts}}
+    <aside class="related-posts" aria-label="Related posts">
+        <div class="container">
+            <h2 class="related-posts-title">More from <em>{{primary_tag.name}}</em></h2>
+            <div class="related-posts-grid">
+                {{#foreach related_posts}}
+                    {{#has tag="cogs-log"}}
+                        {{> cogs-log-card}}
+                    {{else}}
+                        {{> post-card}}
+                    {{/has}}
+                {{/foreach}}
+            </div>
+        </div>
+    </aside>
+    {{/if}}
+    {{/get}}
+    {{/if}}
+
+</div>
+{{/post}}

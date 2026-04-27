@@ -1,0 +1,49 @@
+<footer class="site-footer" role="contentinfo">
+    <div class="container">
+        <div class="footer-inner">
+
+            {{!-- Brand --}}
+            <div class="footer-col footer-brand">
+                <a href="{{@site.url}}" class="footer-brand-link">
+                    {{#if @site.logo}}
+                    <img src="{{@site.logo}}" alt="{{@site.title}}" class="footer-logo">
+                    {{else}}
+                    <span class="footer-site-name">{{@site.title}}</span>
+                    {{/if}}
+                </a>
+                <p class="footer-description">{{@site.description}}</p>
+            </div>
+
+            {{!-- Navigate --}}
+            <div class="footer-col footer-nav-col">
+                <h4 class="footer-col-title">Navigate</h4>
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <ul class="footer-nav-list">
+                        {{#foreach navigation}}
+                        <li><a href="{{url}}">{{label}}</a></li>
+                        {{/foreach}}
+                    </ul>
+                </nav>
+            </div>
+
+            {{!-- Subscribe --}}
+            <div class="footer-col footer-subscribe-col">
+                <h4 class="footer-col-title">Subscribe</h4>
+                <p class="footer-subscribe-text">Get notified when the next catastrophe gets documented.</p>
+                {{#unless @member}}
+                <a href="javascript:void(0)" data-portal="signup" class="footer-subscribe-btn">Subscribe →</a>
+                {{else}}
+                <p class="footer-member-note">You're subscribed. Brave choice. ⚙️</p>
+                {{/unless}}
+            </div>
+
+        </div>
+
+        {{!-- Bottom bar --}}
+        <div class="footer-bottom">
+            <p class="footer-copyright">
+                &copy; {{date format="YYYY"}} Crosswind Holdings, LLC · Built by a man and his gear.
+            </p>
+        </div>
+    </div>
+</footer>

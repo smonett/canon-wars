@@ -1,0 +1,55 @@
+{{!< default}}
+
+{{!-- Homepage --}}
+<div class="homepage">
+
+    {{!-- Hero: site branding --}}
+    <section class="site-hero" aria-label="Site introduction">
+        <div class="container">
+            {{#if @site.logo}}
+            <div class="site-crest">
+                <img src="{{@site.logo}}" alt="{{@site.title}} crest" class="site-logo">
+            </div>
+            {{/if}}
+            <h1 class="site-title">{{@site.title}}</h1>
+            {{#if @site.description}}
+            <p class="site-tagline">{{@site.description}}</p>
+            {{/if}}
+            <p class="site-motto"><span class="gear-spin">⚙️</span> Dispatches from the front lines of human–AI relations</p>
+        </div>
+    </section>
+
+    {{!-- Post grid --}}
+    <section class="post-grid-section" aria-label="Recent posts">
+        <div class="container">
+
+            {{!-- Optional: Tag series nav --}}
+            {{#if @site.navigation}}
+            <nav class="tag-filter-nav" aria-label="Browse by series">
+                <ul class="tag-filter-list" role="list">
+                    <li><a href="{{@site.url}}" class="tag-filter-link{{#is "home"}} active{{/is}}">All</a></li>
+                    {{#foreach navigation}}
+                    <li><a href="{{url}}" class="tag-filter-link{{#if current}} active{{/if}}">{{label}}</a></li>
+                    {{/foreach}}
+                </ul>
+            </nav>
+            {{/if}}
+
+            {{!-- Post grid --}}
+            <div class="post-grid">
+                {{#foreach posts}}
+                    {{#has tag="cogs-log"}}
+                        {{> cogs-log-card}}
+                    {{else}}
+                        {{> post-card}}
+                    {{/has}}
+                {{/foreach}}
+            </div>
+
+            {{!-- Pagination --}}
+            {{pagination}}
+
+        </div>
+    </section>
+
+</div>

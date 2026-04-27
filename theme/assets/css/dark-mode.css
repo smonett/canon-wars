@@ -1,0 +1,54 @@
+/*
+ * Canon Wars — dark-mode.css
+ * Dark mode overrides, referenced separately for clarity.
+ * style.css already embeds these via @media (prefers-color-scheme: dark).
+ * This file is provided for Ghost's asset pipeline and optional manual loading.
+ *
+ * To use this standalone instead of the inline version in style.css,
+ * add in default.hbs:
+ *   <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="{{asset "css/dark-mode.css"}}">
+ * and remove the @media block at the end of style.css.
+ */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg:         #0C0810;
+        --color-text:       #DDD8CE;
+        --color-heading:    #C9A84C;
+        --color-primary:    #C9A84C;
+        --color-accent:     #D4B86A;
+        --color-accent-hot: #E63950;
+        --color-border:     rgba(201, 168, 76, 0.18);
+        --color-surface:    #140E18;
+        --color-surface-alt: #1E1524;
+        --color-muted:      #8A96A8;
+        --color-cogs-bg:    #1E152A;
+        --code-bg:          #1B1520;
+        --code-text:        #C2D0E4;
+    }
+
+    /* Structural dark-mode rules */
+    .site-hero  { background: #0C0810; }
+    .tag-header,
+    .author-header { background: #0C0810; }
+    .site-footer { background: #080510; }
+    .related-posts { background: var(--color-surface-alt); }
+
+    .post-card { box-shadow: 0 1px 4px rgba(0,0,0,0.35); }
+    .post-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+
+    .cogs-log-indicator {
+        background: linear-gradient(90deg, rgba(201,168,76,0.14) 0%, transparent 100%);
+        border-bottom-color: rgba(201, 168, 76, 0.16);
+    }
+
+    ::selection {
+        background: rgba(201, 168, 76, 0.3);
+        color: #fff;
+    }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0C0810; }
+    ::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.5); }
+}

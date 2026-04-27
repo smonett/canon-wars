@@ -1,0 +1,39 @@
+{
+  "name": "canon-wars",
+  "description": "Canon Wars \u2014 custom Ghost theme for Scott Monett's publication. Black, crimson, gold, and cream. Built for Cog's Log and the Canon Wars story series.",
+  "version": "1.0.0",
+  "engines": {
+    "ghost": ">=5.0.0"
+  },
+  "author": {
+    "name": "Scott Monett",
+    "url": "https://the-canon-wars.ghost.io"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ghost",
+    "theme",
+    "canon-wars"
+  ],
+  "config": {
+    "posts_per_page": 12,
+    "image_sizes": {
+      "xs": {
+        "width": 100
+      },
+      "s": {
+        "width": 300
+      },
+      "m": {
+        "width": 600
+      },
+      "l": {
+        "width": 1000
+      },
+      "xl": {
+        "width": 2000
+      }
+    },
+    "card_assets": true
+  }
+}

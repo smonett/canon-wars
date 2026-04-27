@@ -1,0 +1,48 @@
+{{!< default}}
+
+{{#tag}}
+<div class="tag-archive">
+
+    {{!-- Tag header --}}
+    <header class="tag-header">
+        <div class="container">
+            {{#if feature_image}}
+            <div class="tag-cover-wrap">
+                <img src="{{img_url feature_image size="l"}}" alt="{{name}}" class="tag-cover">
+            </div>
+            {{/if}}
+
+            <div class="tag-header-content">
+                {{!-- Gear icon for cogs-log tag --}}
+                {{#match slug "cogs-log"}}
+                <div class="cogs-log-badge large" aria-hidden="true">⚙️</div>
+                {{/match}}
+
+                <h1 class="tag-name">{{name}}</h1>
+
+                {{#if description}}
+                <p class="tag-description">{{description}}</p>
+                {{/if}}
+            </div>
+        </div>
+    </header>
+
+    {{!-- Post grid --}}
+    <section class="post-grid-section" aria-label="Posts tagged {{name}}">
+        <div class="container">
+            <div class="post-grid">
+                {{#foreach posts}}
+                    {{#has tag="cogs-log"}}
+                        {{> cogs-log-card}}
+                    {{else}}
+                        {{> post-card}}
+                    {{/has}}
+                {{/foreach}}
+            </div>
+
+            {{pagination}}
+        </div>
+    </section>
+
+</div>
+{{/tag}}

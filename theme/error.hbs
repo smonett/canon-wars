@@ -1,0 +1,24 @@
+{{!< default}}
+
+<div class="error-page">
+    <div class="container">
+        <div class="error-inner">
+            <div class="error-gear" aria-hidden="true">⚙️</div>
+            <h1 class="error-code">{{statusCode}}</h1>
+            <p class="error-message">
+                {{#if errorMessage}}
+                    {{errorMessage}}
+                {{else}}
+                    {{#match statusCode "=" 404}}
+                        This page has gone off-grid. It may have been moved, deleted, or never existed in the first place.
+                    {{else}}
+                        Something went sideways on our end. It's not you — it's us.
+                    {{/match}}
+                {{/if}}
+            </p>
+            <div class="error-actions">
+                <a href="{{@site.url}}" class="error-home-btn">← Back to {{@site.title}}</a>
+            </div>
+        </div>
+    </div>
+</div>
