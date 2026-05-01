@@ -1,0 +1,34 @@
+{
+  "id": "canon-guardian",
+  "name": "Canon Guardian",
+  "version": "1.0.0",
+  "description": "Selective bootstrap re-injection on model switch, new session, gateway restart, and periodic turn intervals. Complements continuation-skip without per-turn token cost.",
+  "activation": {
+    "onStartup": true
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "canonFiles": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Workspace-relative paths to inject (e.g. AGENTS.md, OPERATING_RULES.md)."
+      },
+      "injectionInterval": {
+        "type": "number",
+        "minimum": 1,
+        "description": "Re-inject every N turns to defend against drift. Default 50."
+      },
+      "restartIdleMs": {
+        "type": "number",
+        "minimum": 0,
+        "description": "Treat session as restarted if last injection was longer ago than this. Default 6h."
+      },
+      "logInjections": {
+        "type": "boolean",
+        "description": "Log each re-injection reason. Default true."
+      }
+    }
+  }
+}
